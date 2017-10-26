@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Halloween Bob's Burgers</title>
+<style>
+body {
+background-color: dimgray;
+font-family: Helvetica;
+color: black;
+}
+
+#main {
+width: 60%;
+border: 1px gray solid;
+margin: auto;
+padding: 10px;
+background-color: lightgray;
+border-radius: 10px;
+}
+
+#header {
+margin-top: 0;
+border: 2px solid black;
+padding: 5px;
+height: 250px;
+background-image: url("etc4.jpg");
+    background-repeat: no-repeat;
+background-size: 100% 100%;
+color: ghostwhite;
+text-align: center;
+}
+
+label{
+    padding:5px;
+    color:#222;
+    font-family:corbel,sans-serif;
+    font-size: 14px;
+    margin: 10px;
+    vertical-align:top;
+}
+
+button {
+display: block;
+margin-top: 20px;
+}
+
+
+</style>
+</head>
+<body>
+<div id="main">
+<div id="header"><h1>Which Bob's Burgers character should you be for Halloween?</h1></div>
+
+<form  id="form1">
+<p>If you could choose, which child would you be?</p></td><td>
+<label><input type="radio" name="age" id="young" value="louise" />Youngest</label><br/>
+<label><input type="radio" name="age" id="mid" value="tina" />Oldest</label><br/>
+<label><input type="radio" name="age" id="old" value="gene" />Middle</label><br/>
+
+<p>Which burger appeals to you the most?</p>
+<label><input type="radio" name="burger" id="party" value="louise" />Human Polenta-Pede</label><br/>
+<label><input type="radio" name="burger" id="rock" value="tina" />Paranormal Pepper Jack-tivity Burger</label><br/>
+<label><input type="radio"  name="burger"id="beer" value="gene" />Jack-O-Lentil Burger</label><br/>
+
+<p>What are you most scared of?</p>
+<label><input type="radio" name="fear" id="rock2" value="louise" />Losing your Kuchi Kopi</label><br/>
+<label><input type="radio" name="fear" id="indie" value="tina" />Peer Pressure</label><br/>
+<label><input type="radio" name="fear" id="country" value="gene" />You're not afraid of ghosts, sharks or cancer, but you're scared of snakes!</label><br/>
+    
+<p>Pick a quote</p>
+<label><input type="radio" name="quote" id="rock2" value="louise" />"It's Halloween not Hallowuss"</label><br/>
+<label><input type="radio" name="quote" id="indie" value="tina" />"I'm a strong sensual woman"</label><br/>
+<label><input type="radio" name="quote" id="country" value="gene" />"You should know when you hold hands with me, you are holding hands with everything I've ever eaten."</label><br/>
+    
+<p>Pick a color</p>
+<label><input type="radio" name="color" id="rock2" value="louise" />Pink</label><br/>
+<label><input type="radio" name="color" id="indie" value="tina" />Blue</label><br/>
+<label><input type="radio" name="color" id="country" value="gene" />Yellow</label><br/>
+
+
+<button type="submit" value="Submit">Submit</button>
+</form>
+
+<p id="answer"></p>
+<p id="answer2"></p>
+<p id="answer3"></p>
+<p id="answer4"></p>
+<p id="answer5"></p>
+<p id="answer6"></p>
+
+</div>
+<script>
+ 
+    
+	document.getElementById("form1").onsubmit=function() {
+	   
+    
+    age = document.querySelector('input[name = "age"]:checked').value;   
+	  
+    burger = document.querySelector('input[name = "burger"]:checked').value;
+	   
+    fear = document.querySelector('input[name = "fear"]:checked').value;
+	    
+    quote = document.querySelector('input[name = "quote"]:checked').value;    
+        
+    color = document.querySelector('input[name = "color"]:checked').value;
+        
+	  // initialize score variables 
+	  louise = 0;
+	  tina = 0;
+	  gene = 0;
+	  
+	  //function to calculate score for each question
+	  function eachscore(x){
+	  if(x == "louise") { louise = louise + 1}
+	  if(x == "tina") { tina = tina + 1}
+	  if(x == "gene") { gene = gene + 1}
+	  }
+	  // for the above function, you could also change the 1 to a variable so you could give more points for certain questions
+	  
+	  //call function for each question
+	  eachscore(eval("age"));
+	  eachscore(eval("burger"));
+	  eachscore(eval("fear"));
+      eachscore(eval("quote"));
+	  eachscore(eval("color"));
+	  
+	  
+	  all = [louise, tina, gene];
+	  
+	//get the max score  in the array
+	maxscore = Math.max.apply(Math,all);
+	
+    //figure out which score is the max score by identifying its index number
+	for(i=0; i<all.length; i++) {
+	if(all[i]==maxscore) {
+	highest = i;
+	}
+	}
+	
+
+// object holding scores and feedback	
+scores = [{index:0, feedback: "You got Louise"},
+{index:1, feedback: "You got Tina"},
+{index:2, feedback: "You got Gene"}];
+
+
+//loop to match index to score and reply with feedback
+for(i=0;i<scores.length; i++) {
+if(highest == scores[i].index) {
+document.getElementById("answer6").innerHTML = scores[i].feedback;
+
+}
+}
+
+	   
+
+
+
+		   
+	   return false; // required to not refresh the page; just leave this here
+	   }// end the submit function
+	
+
+</script>
+
+
+
+</body>
+</html>
